@@ -1,164 +1,280 @@
-body {
+/* General Styles */
+body,
+html {
+  margin: 0;
+  padding: 0;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   height: 100vh;
-  background-color: #239ac2;
+  background-color: #fff3f0;
+  font-family: 'Arial', sans-serif;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .birthdayCard {
-  position: relative;
-  width: 300px;
-  height: 400px;
+  width: 380px;
+  height: 480px;
+  perspective: 1000px;
   cursor: pointer;
-  transform-style: preserve-3d;
-  transform: perspective(2500px);
-  transition: 1s;
+  position: relative;
 }
 
-.birthdayCard:hover {
-  transform: perspective(2500px) rotate(5deg);
-  box-shadow: inset 100px 20px 100px rgba(0, 0, 0, 0.2),
-    0 10px 100px rgba(0, 0, 0, 0.5);
-}
-
-.birthdayCard:hover .cardFront {
-  transform: rotateY(-160deg);
-}
-
-.birthdayCard:hover .happy {
-  visibility: hidden;
+.cardFront,
+.cardInside {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+  transition: transform 1s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  background-color: #fff;
 }
 
 .cardFront {
+  background: radial-gradient(circle, #ffe6e6, #ffccff);
+  border: 5px solid #ff9999;
   position: relative;
-  background-color: #fff;
-  width: 300px;
-  height: 400px;
   overflow: hidden;
-  transform-origin: left;
-  box-shadow: inset 100px 20px 100px rgba(0, 0, 0, 0.2),
-    30px 0 50px rgba(0, 0, 0, 0.4);
-  transition: 0.6s;
 }
 
 .happy {
-  font-family: Tahoma, sans-serif;
-  text-align: center;
-  margin: 30px;
-  background-image: linear-gradient(120deg, #ffd856 0%, #f98c6e 100%);
-  transition: 0.1s;
+  font-size: 30px;
+  font-weight: bold;
+  color: #ff4757;
+  letter-spacing: 1px;
 }
 
+.to {
+  font-size: 22px;
+  color: #3742fa;
+  margin-bottom: 20px;
+}
+
+.nameHighlight {
+  color: #ff6f61;
+  font-weight: bold;
+}
+
+/* Balloons */
 .balloons {
-  position: absolute;
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
 }
 
 .balloon-1,
 .balloon-2,
 .balloon-3,
 .balloon-4 {
-  position: absolute;
-  width: 85px;
-  height: 95px;
-  border-radius: 50%;
-}
-
-.balloon-1 {
-  background-color: rgba(255, 40, 90, 0.7);
-  left: 10px;
-  top: 50px;
+  width: 50px;
+  height: 80px;
+  background-color: #ff4757;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(45deg);
+  animation: float 2s infinite ease-in-out;
 }
 
 .balloon-2 {
-  background-color: rgba(9, 215, 160, 0.7);
-  left: 80px;
-  top: 20px;
+  background-color: #ffa502;
+  animation-delay: 0.2s;
 }
 
 .balloon-3 {
-  background-color: rgba(255, 186, 26, 0.7);
-  left: 140px;
-  top: 50px;
+  background-color: #2ed573;
+  animation-delay: 0.4s;
 }
 
 .balloon-4 {
-  background-color: rgba(12, 122, 159, 0.7);
-  left: 200px;
-  top: 50px;
+  background-color: #1e90ff;
+  animation-delay: 0.6s;
 }
 
-.balloon-1::before,
-.balloon-2::before,
-.balloon-3::before,
-.balloon-4::before {
-  content: "";
+/* Floating Balloons */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(45deg);
+  }
+
+  50% {
+    transform: translateY(-10px) rotate(45deg);
+  }
+}
+
+/* Cake */
+.cake {
+  width: 100px;
+  height: 80px;
+  position: relative;
+}
+
+.cake-base {
+  width: 100%;
+  height: 60px;
+  background-color: #f9ca24;
+  border-radius: 0 0 15px 15px;
   position: absolute;
-  width: 1px;
-  height: 155px;
-  background-color: #ffc848;
-  top: 95px;
-  left: 43px;
+  bottom: 0;
 }
 
-.balloon-1::after,
-.balloon-2::after,
-.balloon-3::after,
-.balloon-4::after {
-  content: "";
-  position: absolute;
-  border-right: 7px solid transparent;
-  border-left: 7px solid transparent;
-  top: 94px;
-  left: 37px;
-}
-
-.balloon-1::after {
-  border-bottom: 10px solid #ff3e6b;
-}
-
-.balloon-2::after {
-  border-bottom: 10px solid #04b183;
-}
-
-.balloon-3::after {
-  border-bottom: 10px solid #ffc94c;
-}
-
-.balloon-4::after {
-  border-bottom: 10px solid #13a9bd;
-}
-
-.cardInside {
-  position: absolute;
+.candle {
+  width: 10px;
+  height: 40px;
   background-color: #fff;
-  width: 300px;
-  height: 400px;
-  z-index: -1;
-  left: 0;
-  top: 0;
-  box-shadow: inset 100px 20px 100px rgba(0, 0, 0, 0.2);
-}
-
-p {
-  font-family: "Brush Script MT";
-  margin: 40px;
-  color: #13a9bd;
-  font-size: medium;
-}
-
-.name {
+  border-radius: 5px;
   position: absolute;
-  left: 150px;
-  top: 330px;
-  color: #04b183;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 10px #fff;
+  animation: flicker 1.5s infinite ease-in-out;
+}
+
+@keyframes flicker {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* Styling for the "Click This Card" message */
+.click-card {
+  margin-top: 20px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  background-color: #fff;
+  color: #f96d6d;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.click-card:hover {
+  transform: scale(1.1);
+}
+
+
+/* Ribbons */
+.ribbons {
+  width: 100%;
+  height: 20px;
+  background: url('ribbon.png') repeat-x center;
+  position: absolute;
+  bottom: 10px;
+  animation: ribbons 2s linear infinite;
+}
+
+@keyframes ribbons {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 100% 0;
+  }
+}
+
+/* Inside Card */
+.cardInside {
+  background-color: #f7f1e3;
+  transform: rotateY(180deg);
 }
 
 .back {
-  font-family: Tahoma, sans-serif;
-  color: #ff3e6b;
+  color: #ff4757;
+  font-size: 26px;
   text-align: center;
-  margin: 30px;
-  outline-color: #04b183;
-  outline-style: dotted;
+  margin-bottom: 15px;
+}
+
+.message {
+  font-size: 16px;
+  color: #57606f;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.closing {
+  font-size: 16px;
+  color: #2f3542;
+  text-align: center;
+}
+
+/* Confetti Animation */
+.confetti {
+  width: 100%;
+  height: 50px;
+  background: url('confetti.png') repeat-x center;
+  position: absolute;
+  bottom: 10px;
+  animation: confetti 1.5s linear infinite;
+}
+
+@keyframes confetti {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 100% 0;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .birthdayCard {
+    width: 300px;
+    height: 420px;
+  }
+
+  .happy {
+    font-size: 24px;
+  }
+
+  .balloon-1,
+  .balloon-2,
+  .balloon-3,
+  .balloon-4 {
+    width: 40px;
+    height: 60px;
+  }
+
+  .back {
+    font-size: 22px;
+  }
+
+  .message,
+  .closing {
+    font-size: 14px;
+  }
+}
+
+/* Flip Animation */
+.birthdayCard.flipped .cardFront {
+  transform: rotateY(-180deg);
+}
+
+.birthdayCard.flipped .cardInside {
+  transform: rotateY(0deg);
 }
